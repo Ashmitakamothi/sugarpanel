@@ -488,6 +488,10 @@
     padding: 16px;
   }
 
+  .heatmap-cells {
+    min-width: 500px;
+  }
+
   /* Store card compact */
   .store-card {
     height: auto;
@@ -905,6 +909,23 @@
   display: flex;
   gap: 16px;
   margin-top: 20px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #E5E7EB transparent;
+}
+
+.heatmap-grid::-webkit-scrollbar {
+  height: 4px;
+}
+
+.heatmap-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.heatmap-grid::-webkit-scrollbar-thumb {
+  background-color: #E5E7EB;
+  border-radius: 20px;
 }
 
 .heatmap-row-header {
@@ -914,6 +935,8 @@
   font-size: 0.75rem;
   color: #9CA3AF;
   height: 180px;
+  flex-shrink: 0;
+  width: 40px;
 }
 
 .heatmap-cells {
