@@ -18,7 +18,7 @@ function App() {
       <div className="dashboard-container">
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         
-        <main className="main-content">
+        <main className={`main-content ${sidebarOpen ? 'sidebar-active' : ''}`}>
           <Header />
           
           <div className="dashboard-content-area">

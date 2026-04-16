@@ -11,6 +11,12 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  transition: filter 0.3s ease;
+}
+
+.main-content.sidebar-active {
+  filter: blur(5px);
+  pointer-events: none;
 }
 
 .dashboard-content-area {
@@ -309,9 +315,8 @@
     display: block;
     position: fixed;
     inset: 0;
-    background: rgba(17, 24, 39, 0.45);
+    background: rgba(17, 24, 39, 0.3);
     z-index: 299;
-    backdrop-filter: blur(2px);
     animation: fadeIn 0.2s ease;
   }
 
