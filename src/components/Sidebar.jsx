@@ -41,11 +41,6 @@ const Sidebar = ({ isOpen, onClose }) => {
           <X size={20} />
         </button>
 
-        <div className="sidebar-logo">
-          <div className="logo-icon"></div>
-          <span className="logo-text">Cosmobit</span>
-        </div>
-
         <nav className="sidebar-nav">
           <div className="nav-section">
             {menuItems.map((item, index) => (

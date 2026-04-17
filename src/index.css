@@ -24,9 +24,13 @@
   --divider: #F3F4F6;
   
   /* Layout */
+  /* Figma full desktop frame width (includes sidebar) */
+  --frame-width: 1512px;
   --sidebar-width: 260px;
-  --top-header-height: 64px;
-  --content-max-width: 1512px;
+  /* Figma desktop header is 88px */
+  --top-header-height: 88px;
+  /* Content area width = frame - sidebar (pixel-perfect) */
+  --content-max-width: calc(var(--frame-width) - var(--sidebar-width));
   --gap: 24px;
   --header-height: 80px;
   /* Middle section (Figma proportions) */
