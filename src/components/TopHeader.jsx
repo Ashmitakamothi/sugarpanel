@@ -26,27 +26,31 @@ const TopHeader = ({ onMenuToggle }) => {
         </div>
       </div>
 
-      <div className="top-header-actions">
-        <div className="lang-selector">
-          <span>EN</span>
-          <ChevronDown size={14} />
+      <div className="top-header-content">
+        <div className="top-header-actions-wrap">
+          <div className="top-header-actions">
+          <div className="lang-selector">
+            <span>EN</span>
+            <ChevronDown size={14} />
+          </div>
+          
+          <button className="top-icon-btn top-btn-maximize">
+            <Maximize size={20} />
+          </button>
+          
+          <button className="top-icon-btn top-btn-chat">
+            <MessageSquare size={20} />
+          </button>
+          
+          <button className="top-icon-btn badge-btn top-btn-bell">
+            <Bell size={20} />
+            <span className="notif-dot"></span>
+          </button>
+          
+          <div className="user-profile">
+            <div className="avatar-circle"></div>
+          </div>
         </div>
-        
-        <button className="top-icon-btn">
-          <Maximize size={20} />
-        </button>
-        
-        <button className="top-icon-btn">
-          <MessageSquare size={20} />
-        </button>
-        
-        <button className="top-icon-btn badge-btn">
-          <Bell size={20} />
-          <span className="notif-dot"></span>
-        </button>
-        
-        <div className="user-profile">
-          <div className="avatar-circle"></div>
         </div>
       </div>
     </div>

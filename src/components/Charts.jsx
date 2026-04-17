@@ -44,17 +44,17 @@ export const TransactionActivity = () => (
         Last Year <Calendar size={14} />
       </button>
     </div>
-    <div className="chart-container">
-      <ResponsiveContainer width="100%" height={250}>
+    <div className="chart-container" style={{ height: '250px', width: '100%', minWidth: '0' }}>
+      <ResponsiveContainer width="100%" height="100%">
         <LineChart data={transactionData}>
           <defs>
             <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#4F46E5" stopOpacity={0.1}/>
-              <stop offset="95%" stopColor="#4F46E5" stopOpacity={0}/>
+              <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.1}/>
+              <stop offset="95%" stopColor="#3B82F6" stopOpacity={0}/>
             </linearGradient>
             <linearGradient id="colorSuccess" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#10B981" stopOpacity={0.1}/>
-              <stop offset="95%" stopColor="#10B981" stopOpacity={0}/>
+              <stop offset="5%" stopColor="#111827" stopOpacity={0.1}/>
+              <stop offset="95%" stopColor="#111827" stopOpacity={0}/>
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F3F4F6" />
@@ -83,20 +83,20 @@ export const SalePerformance = () => (
         Last Year <Calendar size={14} />
       </button>
     </div>
-    <div className="chart-container">
-      <ResponsiveContainer width="100%" height={250}>
-        <BarChart data={performanceData} barCategoryGap={0}>
+    <div className="chart-container" style={{ height: '250px', width: '100%', minWidth: '0' }}>
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={performanceData} barGap={8} barCategoryGap="25%">
           <defs>
             <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#60A5FA" stopOpacity={1} />
-              <stop offset="100%" stopColor="#EFF6FF" stopOpacity={1} />
+              <stop offset="0%" stopColor="#3B82F6" stopOpacity={1} />
+              <stop offset="100%" stopColor="#3B82F6" stopOpacity={0.2} />
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F3F4F6" />
           <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fontSize: 12, fill: '#9CA3AF'}} dy={10} />
           <YAxis hide />
-          <Tooltip cursor={{fill: 'rgba(243, 244, 246, 0.5)'}} contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }} />
-          <Bar dataKey="value">
+          <Tooltip cursor={{fill: 'rgba(243, 244, 246, 0.4)'}} contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }} />
+          <Bar dataKey="value" radius={[6, 6, 6, 6]} barSize={34}>
             {performanceData.map((entry, index) => (
               <Cell key={`cell-${index}`} fill="url(#barGradient)" />
             ))}
@@ -137,12 +137,15 @@ export const ProductStatics = () => (
       <h3>Product Statics</h3>
       <button className="chart-filter-btn">Last Year <Calendar size={14} /></button>
     </div>
-    <div className="chart-container">
-       <ResponsiveContainer width="100%" height={200}>
-         <BarChart data={transactionData.slice(0, 7)}>
+    <div className="chart-container" style={{ height: '230px', width: '100%', minWidth: '0' }}>
+       <ResponsiveContainer width="100%" height="100%">
+         <BarChart data={transactionData.slice(0, 7)} barGap={4}>
+             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F3F4F6" />
              <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fontSize: 12, fill: '#9CA3AF'}} />
-             <Bar dataKey="total" fill="#3B82F6" radius={[4, 4, 0, 0]} barSize={20} />
-             <Bar dataKey="success" fill="#EFF6FF" radius={[4, 4, 0, 0]} barSize={20} />
+             <YAxis hide />
+             <Tooltip cursor={{fill: 'transparent'}} />
+             <Bar dataKey="total" fill="#3B82F6" radius={[6, 6, 6, 6]} barSize={14} />
+             <Bar dataKey="success" fill="#DBEAFE" radius={[6, 6, 6, 6]} barSize={14} />
          </BarChart>
        </ResponsiveContainer>
     </div>

@@ -25,7 +25,18 @@
   
   /* Layout */
   --sidebar-width: 260px;
+  --top-header-height: 64px;
+  --content-max-width: 1512px;
+  --gap: 24px;
   --header-height: 80px;
+  /* Middle section (Figma proportions) */
+  --charts-row-1-height: 320px;
+  --charts-row-2-height: 260px;
+
+  /* Panels (Figma surfaces) */
+  --panel-radius: 24px;
+  --panel-border: #EEF2F7;
+  --panel-shadow: 0 10px 22px rgba(17, 24, 39, 0.05);
   
   /* Shadows */
   --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
