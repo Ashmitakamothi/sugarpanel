@@ -38,20 +38,20 @@ const ProductList = () => {
         <table className="prod-table">
           <thead>
             <tr>
-              <th><input type="checkbox" className="custom-check" /></th>
-              <th>Product Name</th>
-              <th>Revenue</th>
-              <th>Sales</th>
-              <th>Reviews</th>
-              <th>Views</th>
-              <th className="active-col">Active</th>
+              <th className="col-check"><input type="checkbox" className="custom-check" /></th>
+              <th className="col-name">Product Name</th>
+              <th className="col-revenue">Revenue</th>
+              <th className="col-sales">Sales</th>
+              <th className="col-reviews">Reviews</th>
+              <th className="col-views">Views</th>
+              <th className="active-col col-active">Active</th>
             </tr>
           </thead>
           <tbody>
             {products.map(product => (
               <tr key={product.id}>
-                <td><input type="checkbox" className="custom-check" /></td>
-                <td>
+                <td className="col-check" data-label="Select"><input type="checkbox" className="custom-check" /></td>
+                <td className="col-name" data-label="Product">
                   <div className="prod-cell">
                     <div className="prod-thumb"></div>
                     <div className="prod-info">
@@ -60,11 +60,11 @@ const ProductList = () => {
                     </div>
                   </div>
                 </td>
-                <td className="p-bold">{product.revenue}</td>
-                <td className="p-bold">{product.sales}</td>
-                <td className="p-muted">{product.reviews}</td>
-                <td className="p-muted">{product.views}</td>
-                <td className="active-col">
+                <td className="p-bold col-revenue" data-label="Revenue">{product.revenue}</td>
+                <td className="p-bold col-sales" data-label="Sales">{product.sales}</td>
+                <td className="p-muted col-reviews" data-label="Reviews">{product.reviews}</td>
+                <td className="p-muted col-views" data-label="Views">{product.views}</td>
+                <td className="active-col col-active" data-label="Active">
                   <label className="p-toggle">
                     <input type="checkbox" defaultChecked={product.active} />
                     <span className="p-slider"></span>

@@ -2,8 +2,14 @@
    GLOBAL LAYOUT (App.css)
    ========================================================================== */
 
+.app-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
 .main-content {
-  flex: 1;
+  flex: 1 1 auto;
   padding: 0;
   background: var(--bg-app);
   margin-left: var(--sidebar-width);
@@ -11,7 +17,8 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  width: auto;
+  width: 100%;
+  min-width: 0;
   transition: filter 0.3s ease;
 }
 
@@ -455,15 +462,20 @@
     box-sizing: border-box;
   }
 
+  .header-left {
+    width: 100%;
+    min-width: 0;
+  }
+
   .welcome-title {
-    font-size: 1.35rem;
-    line-height: 1.3;
+    font-size: clamp(1rem, 4.6vw, 1.35rem);
+    line-height: 1.2;
     width: 100% !important;
     margin: 0 0 8px 0 !important;
-    white-space: normal !important;
-    overflow-wrap: break-word !important;
-    word-wrap: break-word !important;
     display: block !important;
+    white-space: normal !important; /* never cut text on mobile */
+    overflow: visible;
+    text-overflow: unset;
   }
 
   .notif-subtitle {
@@ -555,6 +567,16 @@
     padding: 16px;
   }
 
+  /* Product table: reduce columns on mobile */
+  .prod-table {
+    min-width: 640px;
+  }
+
+  .prod-table .col-reviews,
+  .prod-table .col-views {
+    display: none;
+  }
+
   /* Conversion */
   .conversion-card-v2 {
     padding: 16px;
@@ -601,9 +623,17 @@
     visibility: visible !important;
   }
 
+  .header-left {
+    width: 100%;
+    min-width: 0;
+  }
+
   .welcome-title {
-    font-size: 1.2rem;
+    font-size: clamp(0.95rem, 4.4vw, 1.15rem);
     display: block !important;
+    white-space: normal !important; /* show full text */
+    overflow: visible;
+    text-overflow: unset;
   }
 
   .store-row {
@@ -618,6 +648,61 @@
   .product-list-card,
   .conversion-card-v2 {
     padding: 12px;
+  }
+
+  /* Product table: keep only essential columns */
+  .prod-table {
+    min-width: 760px;
+  }
+
+  /* Horizontal table scrolling on mobile */
+  .prod-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+
+  /* Keep the most important columns visible by default */
+  .prod-table .col-reviews,
+  .prod-table .col-views {
+    display: none;
+  }
+
+  .prod-cell {
+    gap: 10px;
+  }
+
+  .prod-thumb {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+
+  /* Product list header/search: prevent overflow/cutting */
+  .prod-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .prod-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .prod-search-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .search-box {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .refresh-btn-circle {
+    align-self: flex-end;
   }
 
   /* Hide secondary header action labels on very small screens */
@@ -1360,11 +1445,14 @@
 
 .prod-table-wrapper {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
 }
 
 .prod-table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 760px; /* prevent squished columns; wrapper scrolls */
 }
 
 .prod-table th {
@@ -1418,6 +1506,12 @@
   font-size: 0.85rem;
   font-weight: 700;
   color: #111827;
+}
+
+.p-muted {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6B7280;
 }
 
 .active-col {
