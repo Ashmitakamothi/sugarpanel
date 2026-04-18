@@ -298,6 +298,10 @@
    ========================================================================== */
 
 @media (max-width: 1400px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .main-grid-layout {
     grid-template-columns: 1fr;
   }
@@ -309,6 +313,19 @@
   .conversion-block {
     width: 100%;
     min-width: unset;
+  }
+}
+
+@media (max-width: 1200px) {
+  .charts-grid-row {
+    grid-template-columns: 1fr;
+  }
+  .chart-card,
+  .chart-card.tall {
+    grid-column: span 1;
+  }
+  .store-row {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -354,25 +371,8 @@
     padding: var(--top-header-height) 0 0 0; /* keep fixed header offset */
   }
 
-  /* Stats: 2 per row on tablet */
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  /* Stats, Charts, and Store stacking moved to 1400px/1200px */
 
-  /* Charts: stack on tablet */
-  .charts-grid-row {
-    grid-template-columns: 1fr;
-  }
-
-  .chart-card,
-  .chart-card.tall {
-    grid-column: span 1;
-  }
-
-  /* Store: 2 per row */
-  .store-row {
-    grid-template-columns: repeat(2, 1fr);
-  }
 
   .chart-card .chart-container {
     height: 280px !important; /* Force stability for Recharts on mobile/tablet */
@@ -580,58 +580,86 @@
     display: block; /* Ensure it stays visible but we control button width */
   }
 
-  /* Top header */
+  /* Top header — two zones: left (menu+logo) | right (actions), no overlap */
   .top-header {
-    /* make it a single-row mobile bar */
-    display: flex;
+    display: flex !important;
+    grid-template-columns: none !important;
+    flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
-    padding: 0 12px;
+    gap: 8px;
+    padding: 0 10px;
+    min-height: 56px;
+    height: auto;
+    box-sizing: border-box;
   }
 
   .top-header-left {
-    padding-left: 0;
-    flex: 0 0 auto;
-    min-width: 150px;
+    flex: 1 1 auto;
+    min-width: 0;
+    /* Room for EN + 4 icon buttons + avatar */
+    max-width: calc(100% - 232px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-left: 0 !important;
+  }
+
+  .hamburger-btn {
+    flex-shrink: 0;
+  }
+
+  /*
+    Logo PNG is very wide with lots of empty space on the right.
+    Scaling by height alone shrinks the real mark to almost nothing.
+    Fixed box + cover + left crops to the real logo on the left edge.
+  */
+  .top-header-logo {
+    flex: 0 1 auto;
+    width: clamp(72px, calc(100vw - 272px), 160px);
+    height: 30px;
+    overflow: hidden;
+    display: block;
+    position: relative;
+  }
+
+  .top-header-logo .brand-logo {
+    display: block !important;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left center;
+    max-width: none !important;
+  }
+
+  .top-header-content {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    max-width: 232px;
+    height: auto !important;
+    justify-content: flex-end !important;
+    min-width: 0;
   }
 
   .top-header-actions-wrap {
-    max-width: 100%;
-    padding: 0;
-    flex: 1 1 auto;
+    width: auto !important;
+    max-width: none !important;
+    flex: 0 0 auto !important;
+    padding: 0 !important;
   }
 
   .lang-selector {
     display: inline-flex;
-    padding: 6px 10px;
-    font-size: 0.82rem;
-  }
-
-  /* Mobile logo should be visible (no clipping) */
-  .top-header-logo {
-    max-width: 140px;
-    overflow: visible;
-    display: flex;
-    align-items: center;
-  }
-
-  .top-header-logo .brand-logo {
-    height: 20px !important;
-    width: auto !important;
-    max-width: none !important;
-    object-fit: contain;
-    display: block !important;
-  }
-
-  .top-header-content {
-    justify-content: flex-end;
-    flex: 1 1 auto;
-    min-width: 0;
+    padding: 4px 8px;
+    font-size: 0.76rem;
+    flex-shrink: 0;
   }
 
   .top-header-actions {
-    flex-wrap: nowrap;
+    flex-wrap: nowrap !important;
     white-space: nowrap;
+    gap: 4px !important;
+    justify-content: flex-end;
   }
 
   /* Stat card compact */
@@ -683,11 +711,21 @@
     padding: 16px;
   }
 
-  /* Top header tiny adjustments */
+  /* Top header — all icons visible; slightly compact */
   .top-icon-btn {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     padding: 0;
+    flex-shrink: 0;
+  }
+
+  .user-profile {
+    flex-shrink: 0;
+  }
+
+  .avatar-circle {
+    width: 30px;
+    height: 30px;
   }
 }
 
@@ -708,47 +746,42 @@
   .chart-header {
     margin-bottom: 16px;
   }
-  /* Top header: prevent overflow + match mobile bar */
+  /* Top header: compact bar */
   .top-header {
-    height: 56px;
+    min-height: 52px;
+    padding: 0 8px;
   }
 
-  .top-header-logo .brand-logo {
-    height: 18px;
+  .top-header-left {
+    max-width: calc(100% - 220px);
+  }
+
+  .top-header-content {
+    max-width: 220px;
   }
 
   .top-header-logo {
-    max-width: 120px;
-  }
-
-  .top-header-logo .brand-logo {
-    height: 50px !important;
-    max-width: none !important;
+    width: clamp(64px, calc(100vw - 260px), 140px);
+    height: 28px;
   }
 
   .top-header-actions {
-    gap: 8px;
+    gap: 3px !important;
   }
 
   .lang-selector {
-    padding: 5px 8px;
-    font-size: 0.78rem;
-  }
-
-  /* Hide less important icons on very small screens */
-  .top-btn-maximize,
-  .top-btn-chat {
-    display: none;
+    padding: 3px 6px;
+    font-size: 0.7rem;
   }
 
   .top-icon-btn {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
   }
 
   .avatar-circle {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
   }
   .stats-grid {
     grid-template-columns: 1fr;
@@ -1234,7 +1267,9 @@
 .chart-header {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
   margin-bottom: 24px;
 }
 
@@ -1348,6 +1383,9 @@
 /* ==========================================================================
    RIGHT PANEL / SCHEDULE STYLES
    ========================================================================== */
+.right-panel {
+  width: 100%;
+}
 
 .schedule-card-v2 {
   background: white;

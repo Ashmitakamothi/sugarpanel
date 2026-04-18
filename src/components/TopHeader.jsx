@@ -20,7 +20,7 @@ const TopHeader = ({ onMenuToggle }) => {
         <div className="top-header-logo">
           <img 
             src="/sugarpanel_logo.png" 
-            alt="Sugarpanel Logo" 
+            alt="Sugarpanel" 
             className="brand-logo"
           />
         </div>
