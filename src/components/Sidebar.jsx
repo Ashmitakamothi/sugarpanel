@@ -1,22 +1,34 @@
 import React from 'react';
-import { X } from 'lucide-react';
+import { 
+  X, 
+  LayoutDashboard, 
+  BarChart2, 
+  Package, 
+  Users, 
+  Bell, 
+  Inbox, 
+  Layers, 
+  FileText,
+  Moon,
+  Settings
+} from 'lucide-react';
 
 const Sidebar = ({ isOpen, onClose }) => {
   const menuItems = [
-    { label: 'Dashboard' },
-    { label: 'Analytics' },
-    { label: 'Products' },
-    { label: 'Customers' },
-    { label: 'Notifications' },
-    { label: 'Inbox' },
-    { label: 'Pages' },
-    { label: 'Reports' },
-    
+    { label: 'Dashboard', icon: LayoutDashboard, active: true },
+    { label: 'Analytics', icon: BarChart2 },
+    { label: 'Products', icon: Package },
+    { label: 'Customers', icon: Users },
+    { label: 'Notifications', icon: Bell },
+    { label: 'Inbox', icon: Inbox },
+    { label: 'Pages', icon: Layers },
+    { label: 'Reports', icon: FileText },
+   
   ];
 
   const bottomItems = [
-    { label: 'Dark Mode' },
-    { label: 'Settings' },
+    { label: 'Dark Mode', icon: Moon },
+    { label: 'Settings', icon: Settings },
   ];
 
   return (
@@ -47,7 +59,8 @@ const Sidebar = ({ isOpen, onClose }) => {
                 aria-current={item.active ? 'page' : undefined}
                 onClick={onClose}
               >
-                {item.label}
+                <item.icon size={20} strokeWidth={2} className="nav-icon" />
+                <span className="nav-label">{item.label}</span>
               </button>
             ))}
           </div>
@@ -60,7 +73,8 @@ const Sidebar = ({ isOpen, onClose }) => {
                 className="sidebar-nav-btn"
                 onClick={onClose}
               >
-                {item.label}
+                <item.icon size={20} strokeWidth={2} className="nav-icon" />
+                <span className="nav-label">{item.label}</span>
               </button>
             ))}
           </div>
