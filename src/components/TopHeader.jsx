@@ -7,53 +7,42 @@ import {
   Menu
 } from 'lucide-react';
 
-
 const TopHeader = ({ onMenuToggle }) => {
   return (
-    <div className="top-header">
-      <div className="top-header-left">
-        {/* Hamburger - only visible on mobile */}
-        <button className="hamburger-btn" onClick={onMenuToggle} aria-label="Open menu">
-          <Menu size={22} />
+    <header className="top-header" role="banner">
+      <div className="top-header-inner">
+        <button className="hamburger-btn" type="button" onClick={onMenuToggle} aria-label="Open menu">
+          <Menu size={22} strokeWidth={2} />
         </button>
 
-        <div className="top-header-logo">
-          <img 
-            src="/sugarpanel_logo.png" 
-            alt="Sugarpanel" 
-            className="brand-logo"
-          />
-        </div>
-      </div>
-
-      <div className="top-header-content">
         <div className="top-header-actions-wrap">
           <div className="top-header-actions">
-          <div className="lang-selector">
-            <span>EN</span>
-            <ChevronDown size={14} />
+            <button type="button" className="lang-selector" aria-label="Language: English">
+              <span>EN</span>
+              <ChevronDown size={16} strokeWidth={2} className="lang-chevron" />
+            </button>
+          
+            <button type="button" className="top-icon-btn top-btn-maximize" aria-label="Enter fullscreen">
+              <Maximize size={18} strokeWidth={2} />
+            </button>
+          
+            <button type="button" className="top-icon-btn badge-btn top-btn-chat" aria-label="Messages">
+              <MessageSquare size={20} strokeWidth={2} />
+              <span className="notif-dot" aria-hidden="true" />
+            </button>
+          
+            <button type="button" className="top-icon-btn badge-btn top-btn-bell" aria-label="Notifications">
+              <Bell size={20} strokeWidth={2} />
+              <span className="notif-dot" aria-hidden="true" />
+            </button>
+          
+            <button type="button" className="user-profile" aria-label="Account">
+              <span className="avatar-circle" />
+            </button>
           </div>
-          
-          <button className="top-icon-btn top-btn-maximize">
-            <Maximize size={20} />
-          </button>
-          
-          <button className="top-icon-btn top-btn-chat">
-            <MessageSquare size={20} />
-          </button>
-          
-          <button className="top-icon-btn badge-btn top-btn-bell">
-            <Bell size={20} />
-            <span className="notif-dot"></span>
-          </button>
-          
-          <div className="user-profile">
-            <div className="avatar-circle"></div>
-          </div>
-        </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

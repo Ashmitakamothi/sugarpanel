@@ -2,7 +2,14 @@
   --font-main: 'Inter', system-ui, -apple-system, sans-serif;
   
   /* Colors */
-  --bg-app: #F1F4FA; /* More pronounced premium shady blue tint */
+  --bg-app: #F8F9FB; /* Figma base (under overlay) */
+  /* Figma `# background` > `overlay`: #ECECEC @ 67%; blur 300px on .dashboard-bg-overlay */
+  --bg-overlay-opacity: 0.67;
+  --bg-overlay-tint: rgba(236, 236, 236, var(--bg-overlay-opacity)); /* #ECECEC */
+  /* Figma `header`: white fill + blur 100 -> Changed to requested color */
+  --top-header-bg: transparent;
+  --bg-ornament-blue: rgba(0, 94, 255, 0.26);
+  --bg-ornament-accent: rgba(167, 139, 250, 0.22);
   --bg-sidebar: #FFFFFF;
   --bg-card: #FFFFFF;
   
@@ -26,21 +33,25 @@
   /* Layout */
   /* Figma full desktop frame width (includes sidebar) */
   --frame-width: 1512px;
-  --sidebar-width: 260px;
+  --sidebar-width: 220px;
   /* Figma desktop header is 88px */
   --top-header-height: 88px;
+  /* Height from top of viewport to bottom of sidebar brand block (align first nav with main column) */
+  --sidebar-brand-stack: 72px;
+  --dashboard-header-padding-y: 12px;
   /* Content area width = frame - sidebar (pixel-perfect) */
-  --content-max-width: calc(var(--frame-width) - var(--sidebar-width));
-  --gap: 24px;
+  /* Main dashboard column (Figma fixed ~1402px) */
+  --content-max-width: 1402px;
+  --gap: 12px;
   --header-height: 80px;
   /* Middle section (Figma proportions) */
   --charts-row-1-height: 320px;
   --charts-row-2-height: 260px;
 
-  /* Panels (Figma surfaces) */
-  --panel-radius: 24px;
+  /* Panels (Figma surfaces — ~12px radius, soft shadow) */
+  --panel-radius: 12px;
   --panel-border: #EEF2F7;
-  --panel-shadow: 0 10px 22px rgba(17, 24, 39, 0.05);
+  --panel-shadow: 0 1px 2px rgba(17, 24, 39, 0.04), 0 4px 16px rgba(17, 24, 39, 0.06);
   
   /* Shadows */
   --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
@@ -64,6 +75,7 @@
 body {
   font-family: var(--font-main);
   background-color: var(--bg-app);
+  min-height: 100vh;
   color: #1F2937;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -109,6 +121,8 @@ ul {
 .dashboard-container {
   display: flex;
   min-height: 100vh;
+  position: relative;
+  z-index: 1;
 }
 
 /* main-content layout is fully managed in App.css with responsive breakpoints */

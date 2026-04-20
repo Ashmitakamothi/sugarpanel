@@ -1,69 +1,72 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  LayoutDashboard, 
-  LineChart, 
-  Package, 
-  Users, 
-  Bell, 
-  Inbox, 
-  Layers, 
-  List, 
-  Grid,
-  Moon,
-  Settings,
-  X,
-  Menu
-} from 'lucide-react';
+import React from 'react';
+import { X } from 'lucide-react';
 
 const Sidebar = ({ isOpen, onClose }) => {
   const menuItems = [
-    { icon: <LayoutDashboard size={20} />, label: 'Dashboard', active: true },
-    { icon: <LineChart size={20} />, label: 'Analytics' },
-    { icon: <Package size={20} />, label: 'Products' },
-    { icon: <Users size={20} />, label: 'Customers' },
-    { icon: <Bell size={20} />, label: 'Notifications' },
-    { icon: <Inbox size={20} />, label: 'Inbox' },
-    { icon: <Layers size={20} />, label: 'Pages' },
-    { icon: <List size={20} />, label: 'Reports' },
-    { icon: <Grid size={20} />, label: 'Apps' }
+    { label: 'Dashboard' },
+    { label: 'Analytics' },
+    { label: 'Products' },
+    { label: 'Customers' },
+    { label: 'Notifications' },
+    { label: 'Inbox' },
+    { label: 'Pages' },
+    { label: 'Reports' },
+    { label: 'Apps' },
+     { label: 'Apps' },
+      { label: 'Apps' },
+       { label: 'Apps' },
+        { label: 'Apps' },
+  ];
+
+  const bottomItems = [
+    { label: 'Dark Mode' },
+    { label: 'Settings' },
   ];
 
   return (
     <>
-      {/* Mobile overlay backdrop */}
       {isOpen && (
-        <div className="sidebar-overlay" onClick={onClose} />
+        <div className="sidebar-overlay" onClick={onClose} aria-hidden="true" />
       )}
 
-      <aside className={`sidebar ${isOpen ? 'sidebar-open' : ''}`}>
-        {/* Mobile close button */}
-        <button className="sidebar-close-btn" onClick={onClose} aria-label="Close menu">
-          <X size={20} />
+      <aside className={`sidebar ${isOpen ? 'sidebar-open' : ''}`} aria-label="Main navigation">
+        <button type="button" className="sidebar-close-btn" onClick={onClose} aria-label="Close menu">
+          <X size={20} strokeWidth={2} />
         </button>
 
+        <div className="sidebar-brand">
+          <div className="brand-mark" aria-hidden="true">
+            <span /><span /><span /><span />
+          </div>
+          <span className="sidebar-brand-text">Sugarpanel</span>
+        </div>
+
         <nav className="sidebar-nav">
-          <div className="nav-section">
-            {menuItems.map((item, index) => (
-              <div 
-                key={index} 
-                className={`nav-item ${item.active ? 'active' : ''}`}
+          <div className="nav-section nav-section-main">
+            {menuItems.map((item) => (
+              <button
+                key={item.label}
+                type="button"
+                className={`sidebar-nav-btn ${item.active ? 'active' : ''}`}
+                aria-current={item.active ? 'page' : undefined}
                 onClick={onClose}
               >
-                <span className="nav-icon">{item.icon}</span>
-                <span className="nav-label">{item.label}</span>
-              </div>
+                {item.label}
+              </button>
             ))}
           </div>
 
-          <div className="nav-section bottom">
-            <div className="nav-item" onClick={onClose}>
-               <span className="nav-icon"><Moon size={20} /></span>
-               <span className="nav-label">Dark Mode</span>
-            </div>
-            <div className="nav-item" onClick={onClose}>
-               <span className="nav-icon"><Settings size={20} /></span>
-               <span className="nav-label">Settings</span>
-            </div>
+          <div className="nav-section nav-section-bottom">
+            {bottomItems.map((item) => (
+              <button
+                key={item.label}
+                type="button"
+                className="sidebar-nav-btn"
+                onClick={onClose}
+              >
+                {item.label}
+              </button>
+            ))}
           </div>
         </nav>
       </aside>

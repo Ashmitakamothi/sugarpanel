@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronLeft, ChevronRight, Search, Video, ChevronDown } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Search, ChevronDown } from 'lucide-react';
 
 
 const meetings = [

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ChevronRight } from 'lucide-react';
 import TopHeader from './components/TopHeader';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
@@ -14,6 +15,14 @@ function App() {
 
   return (
     <div className="app-wrapper">
+      {/* Figma # background: base + ornaments + overlay (blur) */}
+      <div className="dashboard-background" aria-hidden="true">
+        <div className="dashboard-bg-base" />
+        <div className="dashboard-bg-ornament dashboard-bg-ornament--accent" />
+        <div className="dashboard-bg-ornament dashboard-bg-ornament--primary" />
+        <div className="dashboard-bg-overlay" />
+      </div>
+
       <TopHeader onMenuToggle={() => setSidebarOpen(true)} />
       <div className="dashboard-container">
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
@@ -29,19 +38,16 @@ function App() {
                 title="Gross Revenue" 
                 value="$2,480.32" 
                 change="+8.33%" 
-                color="#10B981" 
               />
               <StatCard 
                 title="Avg. Order Value" 
                 value="$320.21" 
                 change="-8.33%" 
-                color="#EF4444" 
               />
               <StatCard 
                 title="Total Orders" 
                 value="$1,899.49" 
                 change="+8.33%" 
-                color="#10B981" 
               />
             </div>
 
@@ -70,11 +76,11 @@ function App() {
                   <div key={store} className="store-card">
                     <div className="store-header">
                       <h4>{store}</h4>
-                      <span className="see-more">See More</span>
+                      <span className="see-more">See More <ChevronRight size={14} strokeWidth={2} aria-hidden="true" /></span>
                     </div>
                     <div className="store-stats">
                       <div className="perf">
-                        <span className="label">Performance Seller - 78%</span>
+                        <span className="label">Performance Seller - 75%</span>
                         <span className="members">12 Active Members</span>
                       </div>
                       <div className="avatars">

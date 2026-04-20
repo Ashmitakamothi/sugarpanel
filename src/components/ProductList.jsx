@@ -1,5 +1,5 @@
-import React from 'react';
-import { Search, RotateCcw, ChevronRight } from 'lucide-react';
+import React, { useRef } from 'react';
+import { Search, RotateCcw, TrendingUp } from 'lucide-react';
 
 
 const products = [
@@ -11,34 +11,59 @@ const products = [
 ];
 
 const ProductList = () => {
+  const searchInputRef = useRef(null);
+
   return (
     <div className="product-list-card">
       <h2 className="section-title">Product List</h2>
-      <div className="prod-header">
 
-        <div className="prod-stats">
-          <span className="count">3280</span> <span className="label">Item</span>
-          <span className="badge-up">+8.33%</span>
+      <div className="prod-toolbar-shell">
+        <div className="prod-toolbar-row">
+          <div className="prod-stats">
+            <span className="count">3280</span>
+            <span className="label">Item</span>
+            <span className="badge-up">
+              <TrendingUp size={12} strokeWidth={2.5} aria-hidden="true" />
+              +8.33%
+            </span>
+          </div>
+          <div className="prod-toolbar-actions-top">
+            <button type="button" className="prod-see-more-pill">
+              See More
+            </button>
+            <button
+              type="button"
+              className="prod-icon-circle prod-icon-circle--light"
+              aria-label="Search"
+              onClick={() => searchInputRef.current?.focus()}
+            >
+              <Search size={18} strokeWidth={2} />
+            </button>
+          </div>
         </div>
-        <div className="prod-actions">
-          <button className="see-more-btn">See More</button>
-          <button className="icon-action"><Search size={20}/></button>
-        </div>
-      </div>
 
-      <div className="prod-search-row">
-        <div className="search-box">
-          <Search size={16} className="s-icon" />
-          <input type="text" placeholder="Search..." />
+        <div className="prod-toolbar-row prod-toolbar-row--search">
+          <div className="search-box prod-main-search prod-search-pill">
+            <Search size={16} strokeWidth={2} className="s-icon" aria-hidden="true" />
+            <input
+              ref={searchInputRef}
+              type="search"
+              placeholder="Search..."
+              autoComplete="off"
+              aria-label="Search products"
+            />
+          </div>
+          <button type="button" className="prod-icon-circle prod-icon-circle--light" aria-label="Refresh">
+            <RotateCcw size={18} strokeWidth={2} />
+          </button>
         </div>
-        <button className="refresh-btn-circle"><RotateCcw size={18}/></button>
       </div>
 
       <div className="prod-table-wrapper">
         <table className="prod-table">
           <thead>
             <tr>
-              <th className="col-check"><input type="checkbox" className="custom-check" /></th>
+              <th className="col-check"><input type="checkbox" className="custom-check" aria-label="Select all" /></th>
               <th className="col-name">Product Name</th>
               <th className="col-revenue">Revenue</th>
               <th className="col-sales">Sales</th>
@@ -50,10 +75,10 @@ const ProductList = () => {
           <tbody>
             {products.map(product => (
               <tr key={product.id}>
-                <td className="col-check" data-label="Select"><input type="checkbox" className="custom-check" /></td>
+                <td className="col-check" data-label="Select"><input type="checkbox" className="custom-check" aria-label={`Select ${product.name}`} /></td>
                 <td className="col-name" data-label="Product">
                   <div className="prod-cell">
-                    <div className="prod-thumb"></div>
+                    <div className="prod-thumb" />
                     <div className="prod-info">
                       <div className="p-name">{product.name}</div>
                       <div className="p-status">{product.status}</div>
@@ -67,7 +92,7 @@ const ProductList = () => {
                 <td className="active-col col-active" data-label="Active">
                   <label className="p-toggle">
                     <input type="checkbox" defaultChecked={product.active} />
-                    <span className="p-slider"></span>
+                    <span className="p-slider" />
                   </label>
                 </td>
               </tr>

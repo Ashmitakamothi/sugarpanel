@@ -1,18 +1,12 @@
 import React from 'react';
-import { Calendar, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Calendar, ChevronRight, TrendingUp, TrendingDown } from 'lucide-react';
 
 
-const conversionData = [
-  { label: 'Product Views', value: '6,575', sub: '29%' },
-  { label: 'Add to Cart', value: '6,575', sub: '29%' },
-  { label: 'Checkout Initiated', value: '6,575', sub: '29%' },
-  { label: 'Completed Purchases', value: '6,575', sub: '29%' },
-  { label: 'Completed Purchases', value: '6,575', sub: '29%' },
-   { label: 'Completed Purchases', value: '6,575', sub: '29%' },
-    { label: 'Completed Purchases', value: '6,575', sub: '29%' },
-  
- 
-   
+const funnelMetrics = [
+  { label: 'Product Views', value: '6,575', sub: '29%', up: true },
+  { label: 'Add to Cart', value: '4,210', sub: '18%', up: true },
+  { label: 'Checkout Initiated', value: '2,890', sub: '12%', up: false },
+  { label: 'Completed Purchases', value: '1,902', sub: '8%', up: true },
 ];
 
 const ConversionRate = () => {
@@ -20,29 +14,28 @@ const ConversionRate = () => {
     <div className="conversion-card-v2">
       <div className="conv-header">
         <h3>Conversion Rate</h3>
-        <button className="conv-filter">Last Year <Calendar size={14}/></button>
-      </div>
-
-      <div className="calendar-pill">
-        <ChevronLeft size={16} className="nav-icon" />
-        <span className="month">January 2025</span>
-        <ChevronRight size={16} className="nav-icon" />
+        <button type="button" className="conv-filter">Last Year <Calendar size={14} strokeWidth={2} /></button>
       </div>
 
       <div className="conv-list">
-        {conversionData.map((item, idx) => (
-          <div key={idx} className="conv-item">
+        {funnelMetrics.map((item) => (
+          <div key={item.label} className="conv-item">
             <div className="item-labels">
               <span className="main-label">{item.label}</span>
               <span className="sub-label">{item.sub}</span>
             </div>
-            <span className="item-value">{item.value}</span>
+            <div className="conv-item-right">
+              <span className="item-value">{item.value}</span>
+              <span className={`conv-trend ${item.up ? 'conv-trend-up' : 'conv-trend-down'}`} aria-hidden="true">
+                {item.up ? <TrendingUp size={16} strokeWidth={2} /> : <TrendingDown size={16} strokeWidth={2} />}
+              </span>
+            </div>
           </div>
         ))}
       </div>
 
       <div className="conv-footer">
-        <button className="learn-more">Learn More <ChevronRight size={14}/></button>
+        <button type="button" className="learn-more">Learn More <ChevronRight size={14} strokeWidth={2} /></button>
       </div>
     </div>
   );
