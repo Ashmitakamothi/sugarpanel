@@ -3,14 +3,10 @@ import { Calendar, ChevronRight, TrendingUp, TrendingDown } from 'lucide-react';
 
 
 const funnelMetrics = [
-  { label: 'Product Views', value: '6,575', sub: '29%', up: true },
-  { label: 'Add to Cart', value: '4,210', sub: '18%', up: true },
-  { label: 'Checkout Initiated', value: '2,890', sub: '12%', up: false },
-  { label: 'Completed Purchases', value: '1,902', sub: '8%', up: true },
-   { label: 'Completed Purchases', value: '1,902', sub: '8%', up: true },
-    { label: 'Completed Purchases', value: '1,902', sub: '8%', up: true },
-     { label: 'Completed Purchases', value: '1,902', sub: '8%', up: true },
-      { label: 'Completed Purchases', value: '1,902', sub: '8%', up: true },
+  { label: 'Product Views', value: '6,575', sub: '29%' },
+  { label: 'Add to Cart', value: '4,210', sub: '18%' },
+  { label: 'Checkout Initiated', value: '2,890', sub: '12%' },
+  { label: 'Completed Purchases', value: '1,902', sub: '8%' },
 ];
 
 const ConversionRate = () => {
@@ -30,9 +26,6 @@ const ConversionRate = () => {
             </div>
             <div className="conv-item-right">
               <span className="item-value">{item.value}</span>
-              <span className={`conv-trend ${item.up ? 'conv-trend-up' : 'conv-trend-down'}`} aria-hidden="true">
-                {item.up ? <TrendingUp size={16} strokeWidth={2} /> : <TrendingDown size={16} strokeWidth={2} />}
-              </span>
             </div>
           </div>
         ))}
