@@ -41,7 +41,7 @@
   --dashboard-header-padding-y: 12px;
   /* Content area width = frame - sidebar (pixel-perfect) */
   /* Main dashboard column (Figma fixed ~1402px) */
-  --content-max-width: 1402px;
+  --content-max-width: 100%; /* Fully fluid for ultra-wide displays */
   --gap: 12px;
   --header-height: 80px;
   /* Middle section (Figma proportions) */

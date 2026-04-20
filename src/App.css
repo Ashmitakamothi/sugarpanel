@@ -105,11 +105,20 @@
   display: flex;
   flex-direction: column;
   gap: var(--gap, 24px);
-  max-width: var(--content-max-width, 1512px);
   width: 100%;
-  padding: 0 24px;
-  margin: 0 auto 48px auto;
+  max-width: var(--content-max-width);
+  padding: 0 32px; /* Generous padding for full-width feel */
+  margin: 0 0 48px 0;
   height: fit-content;
+}
+
+@media (min-width: 1921px) {
+  .dashboard-content-area {
+    padding: 0 60px; /* Even more space on 4K/Ultra-wide */
+  }
+  .top-header-actions-wrap {
+    padding: 0 60px;
+  }
 }
 
 .breadcrumb {
@@ -2354,11 +2363,12 @@ input:checked + .p-slider:before {
 .top-header-actions-wrap {
   max-width: var(--content-max-width);
   width: 100%;
-  margin-left: auto;
+  margin: 0 auto; /* Centered to match content area */
   box-sizing: border-box;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-end; /* Keep buttons on the right side of the centered container */
   flex-shrink: 0;
+  padding: 0 24px;
 }
 
 /* Mobile brand logo — hidden on desktop, shown on mobile when sidebar is off-screen */
