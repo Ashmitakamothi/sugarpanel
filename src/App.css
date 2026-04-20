@@ -96,10 +96,7 @@
   transition: filter 0.3s ease;
 }
 
-.main-content.sidebar-active {
-  filter: blur(5px);
-  pointer-events: none;
-}
+/* Sidebar active blur only on mobile (moved to media query) */
 
 .dashboard-content-area {
   display: flex;
@@ -466,7 +463,12 @@
     margin-left: 0 !important;
     max-width: 100% !important;
     width: 100% !important;
-    padding: var(--top-header-height) 0 0 0; /* keep fixed header offset */
+    padding: var(--top-header-height) 0 0 0; /* keep absolute header offset */
+  }
+
+  .main-content.sidebar-active {
+    filter: blur(5px);
+    pointer-events: none;
   }
 
   /* Stats, Charts, and Store stacking moved to 1400px/1200px */
@@ -481,9 +483,8 @@
   .header {
     display: flex !important;
     flex-direction: row !important;
-    justify-content: space-between !important;
     align-items: center !important;
-    flex-wrap: wrap;
+    flex-wrap: nowrap !important;
     height: auto !important;
     gap: 16px;
     margin: 16px 0 24px 0 !important;
@@ -647,6 +648,7 @@
     align-items: center !important;
     height: auto !important;
     width: 100% !important;
+    flex-wrap: nowrap !important;
     gap: 16px;
     margin: 16px 0 24px 0 !important;
     padding: 14px 16px !important;
