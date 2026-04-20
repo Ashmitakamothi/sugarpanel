@@ -11,11 +11,7 @@ const Sidebar = ({ isOpen, onClose }) => {
     { label: 'Inbox' },
     { label: 'Pages' },
     { label: 'Reports' },
-    { label: 'Apps' },
-     { label: 'Apps' },
-      { label: 'Apps' },
-       { label: 'Apps' },
-        { label: 'Apps' },
+    
   ];
 
   const bottomItems = [

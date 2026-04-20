@@ -15,6 +15,14 @@ const TopHeader = ({ onMenuToggle }) => {
           <Menu size={22} strokeWidth={2} />
         </button>
 
+        {/* Mobile-only brand logo — visible when sidebar is hidden */}
+        <div className="top-header-brand-mobile" aria-label="Sugarpanel">
+          <div className="brand-mark" aria-hidden="true">
+            <span /><span /><span /><span />
+          </div>
+          <span className="top-header-brand-text">Sugarpanel</span>
+        </div>
+
         <div className="top-header-actions-wrap">
           <div className="top-header-actions">
             <button type="button" className="lang-selector" aria-label="Language: English">

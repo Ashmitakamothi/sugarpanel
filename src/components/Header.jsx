@@ -34,12 +34,12 @@ const Header = () => {
           aria-label="Date"
         >
           <span className="header-date-label">Date</span>
-          <Calendar size={16} strokeWidth={2.5} className="btn-right-icon" aria-hidden="true" />
+          <Calendar size={18} strokeWidth={2.5} className="btn-right-icon" aria-hidden="true" />
         </button>
 
         <button type="button" className="header-export-btn" aria-label="Export Document">
           <span className="header-export-label">Export Document</span>
-          <FileDown size={16} strokeWidth={2.5} className="btn-right-icon" aria-hidden="true" />
+          <FileDown size={18} strokeWidth={2.5} className="btn-right-icon" aria-hidden="true" />
         </button>
 
         <button type="button" className="header-menu-btn" aria-label="Filter or Settings">
