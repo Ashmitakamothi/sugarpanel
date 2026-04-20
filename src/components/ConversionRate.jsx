@@ -7,6 +7,10 @@ const funnelMetrics = [
   { label: 'Add to Cart', value: '4,210', sub: '18%', up: true },
   { label: 'Checkout Initiated', value: '2,890', sub: '12%', up: false },
   { label: 'Completed Purchases', value: '1,902', sub: '8%', up: true },
+   { label: 'Completed Purchases', value: '1,902', sub: '8%', up: true },
+    { label: 'Completed Purchases', value: '1,902', sub: '8%', up: true },
+     { label: 'Completed Purchases', value: '1,902', sub: '8%', up: true },
+      { label: 'Completed Purchases', value: '1,902', sub: '8%', up: true },
 ];
 
 const ConversionRate = () => {
