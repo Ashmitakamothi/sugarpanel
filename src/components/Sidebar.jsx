@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { 
   X, 
   LayoutDashboard, 
@@ -10,26 +11,30 @@ import {
   Layers, 
   FileText,
   Moon,
+  Sun,
   Settings
 } from 'lucide-react';
+import { useDarkMode } from '../context/DarkModeContext';
+
+const menuItems = [
+  { label: 'Dashboard',      icon: LayoutDashboard, path: '/' },
+  { label: 'Analytics',      icon: BarChart2,        path: '/analytics' },
+  { label: 'Products',       icon: Package,          path: '/products' },
+  { label: 'Customers',      icon: Users,            path: '/customers' },
+  { label: 'Notifications',  icon: Bell,             path: '/notifications' },
+  { label: 'Inbox',          icon: Inbox,            path: '/inbox' },
+  { label: 'Pages',          icon: Layers,           path: '/pages' },
+  { label: 'Reports',        icon: FileText,         path: '/reports' },
+];
 
 const Sidebar = ({ isOpen, onClose }) => {
-  const menuItems = [
-    { label: 'Dashboard', icon: LayoutDashboard, active: true },
-    { label: 'Analytics', icon: BarChart2 },
-    { label: 'Products', icon: Package },
-    { label: 'Customers', icon: Users },
-    { label: 'Notifications', icon: Bell },
-    { label: 'Inbox', icon: Inbox },
-    { label: 'Pages', icon: Layers },
-    { label: 'Reports', icon: FileText },
-   
-  ];
+  const { isDark, toggleDark } = useDarkMode();
+  const navigate = useNavigate();
 
-  const bottomItems = [
-    { label: 'Dark Mode', icon: Moon },
-    { label: 'Settings', icon: Settings },
-  ];
+  const handleSettingsClick = () => {
+    navigate('/settings');
+    onClose();
+  };
 
   return (
     <>
@@ -52,31 +57,47 @@ const Sidebar = ({ isOpen, onClose }) => {
         <nav className="sidebar-nav">
           <div className="nav-section nav-section-main">
             {menuItems.map((item) => (
-              <button
+              <NavLink
                 key={item.label}
-                type="button"
-                className={`sidebar-nav-btn ${item.active ? 'active' : ''}`}
-                aria-current={item.active ? 'page' : undefined}
+                to={item.path}
+                end={item.path === '/'}
+                className={({ isActive }) =>
+                  `sidebar-nav-btn${isActive ? ' active' : ''}`
+                }
                 onClick={onClose}
               >
                 <item.icon size={20} strokeWidth={2} className="nav-icon" />
                 <span className="nav-label">{item.label}</span>
-              </button>
+              </NavLink>
             ))}
           </div>
 
           <div className="nav-section nav-section-bottom">
-            {bottomItems.map((item) => (
-              <button
-                key={item.label}
-                type="button"
-                className="sidebar-nav-btn"
-                onClick={onClose}
-              >
-                <item.icon size={20} strokeWidth={2} className="nav-icon" />
-                <span className="nav-label">{item.label}</span>
-              </button>
-            ))}
+            {/* Dark Mode toggle */}
+            <button
+              type="button"
+              className={`sidebar-nav-btn dark-mode-btn ${isDark ? 'active' : ''}`}
+              onClick={toggleDark}
+              aria-label="Toggle dark mode"
+            >
+              {isDark
+                ? <Sun  size={20} strokeWidth={2} className="nav-icon" />
+                : <Moon size={20} strokeWidth={2} className="nav-icon" />
+              }
+              <span className="nav-label">{isDark ? 'Light Mode' : 'Dark Mode'}</span>
+            </button>
+
+            {/* Settings */}
+            <NavLink
+              to="/settings"
+              className={({ isActive }) =>
+                `sidebar-nav-btn${isActive ? ' active' : ''}`
+              }
+              onClick={onClose}
+            >
+              <Settings size={20} strokeWidth={2} className="nav-icon" />
+              <span className="nav-label">Settings</span>
+            </NavLink>
           </div>
         </nav>
       </aside>

@@ -66,6 +66,25 @@
   --radius-xl: 30px;
 }
 
+[data-theme='dark'] {
+  --bg-app: #0B0E14;
+  --bg-overlay-tint: rgba(15, 18, 25, 0.95);
+  --bg-sidebar: #151921;
+  --bg-card: #151921;
+  
+  --top-header-bg: transparent;
+  
+  --text-main: #FFFFFF;
+  --text-muted: #A1A1AA;
+  --text-light: #71717A;
+  
+  --border: rgba(255, 255, 255, 0.1);
+  --divider: rgba(255, 255, 255, 0.05);
+  
+  --panel-border: rgba(255, 255, 255, 0.08);
+  --panel-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
 * {
   margin: 0;
   padding: 0;
