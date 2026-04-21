@@ -2535,3 +2535,280 @@ input:checked + .p-slider:before {
   z-index: 1;
   box-shadow: 0 1px 2px rgba(17, 24, 39, 0.08);
 }
+
+/* ==========================================================================
+   TOP HEADER DROPDOWNS
+   ========================================================================== */
+
+.dropdown-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 260px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+  overflow: hidden;
+  animation: dropdownFadeIn 0.2s ease-out;
+  transform-origin: top right;
+}
+
+@keyframes dropdownFadeIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.dropdown-header {
+  padding: 16px 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #111827;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.dropdown-footer {
+  padding: 12px 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-align: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.01);
+}
+
+.dropdown-footer:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.dropdown-item {
+  width: 100%;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: none;
+  border: none;
+  font-size: 0.85rem;
+  color: #4B5563;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.dropdown-item:hover {
+  background: rgba(0, 0, 0, 0.03);
+  color: #111827;
+}
+
+.dropdown-item.selected {
+  background: rgba(0, 94, 255, 0.05);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.dropdown-item .item-icon {
+  color: #9CA3AF;
+}
+
+.dropdown-item.logout {
+  color: #EF4444;
+}
+
+.dropdown-item.logout:hover {
+  background: #FEF2F2;
+}
+
+.dropdown-item .check-icon {
+  margin-left: auto;
+  color: var(--primary);
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.04);
+  margin: 4px 0;
+}
+
+.dropdown-scroll {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* User Info Section in Profile Dropdown */
+.dropdown-user-info {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-user-info .user-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.dropdown-user-info .user-role {
+  font-size: 0.75rem;
+  color: #6B7280;
+  font-weight: 500;
+}
+
+/* Specific Dropdown Widths */
+.lang-dropdown { width: 180px; }
+.profile-dropdown { width: 220px; }
+
+/* Notification Items */
+.notif-item {
+  padding: 12px 20px;
+}
+
+.notif-icon-box {
+  width: 32px;
+  height: 32px;
+  background: #F3F4F6;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6B7280;
+}
+
+.notif-info {
+  flex: 1;
+}
+
+.notif-title {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #111827;
+  line-height: 1.3;
+}
+
+.notif-time {
+  font-size: 0.7rem;
+  color: #9CA3AF;
+  margin-top: 2px;
+}
+
+/* Chat Items */
+.chat-item {
+  padding: 12px 20px;
+}
+
+.chat-avatar {
+  width: 36px;
+  height: 36px;
+  background: #E5E7EB;
+  border-radius: 50%;
+}
+
+.chat-name {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #111827;
+}
+
+.chat-preview {
+  font-size: 0.75rem;
+  color: #6B7280;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Active states for buttons */
+.lang-selector.active,
+.top-icon-btn.active,
+.user-profile.active {
+  background: #F3F4F6 !important;
+  color: var(--primary) !important;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.lang-selector.active .lang-chevron {
+  transform: rotate(180deg);
+}
+
+.lang-chevron {
+  transition: transform 0.2s ease;
+}
+
+/* ==========================================================================
+   TOOLTIPS
+   ========================================================================== */
+
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]:after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  background: #111827;
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+[data-tooltip]:hover:after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Triangle for tooltip */
+[data-tooltip]:before {
+  content: '';
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  border-width: 0 6px 6px 6px;
+  border-style: solid;
+  border-color: transparent transparent #111827 transparent;
+  opacity: 0;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 10000;
+}
+
+[data-tooltip]:hover:before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Hide tooltips when dropdown is open */
+.lang-selector.active[data-tooltip]:after,
+.lang-selector.active[data-tooltip]:before,
+.top-icon-btn.active[data-tooltip]:after,
+.top-icon-btn.active[data-tooltip]:before,
+.user-profile.active[data-tooltip]:after,
+.user-profile.active[data-tooltip]:before {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  [data-tooltip]:after, [data-tooltip]:before {
+    display: none; /* Tooltips are less useful on touch devices */
+  }
+}
