@@ -24,66 +24,129 @@ import SettingsPage       from './pages/SettingsPage';
 import './App.css';
 
 /* ── Dashboard (index) ─────────────────────────────────────── */
-const DashboardPage = () => (
-  <FilterProvider>
-    <Header />
-    <div className="dashboard-content-area">
-      {/* TIER 1 */}
-      <div className="stats-grid">
-        <UpgradeBanner />
-        <StatCard title="Gross Revenue"    value="$2,480.32" change="+8.33%" />
-        <StatCard title="Avg. Order Value" value="$320.21"   change="-8.33%" />
-        <StatCard title="Total Orders"     value="$1,899.49" change="+8.33%" />
-      </div>
+const DashboardPage = () => {
+  const [selectedStore, setSelectedStore] = useState(null);
 
-      {/* TIER 2 */}
-      <div className="main-grid-layout">
-        <div className="charts-column">
-          <div className="charts-grid-row">
-            <TransactionActivity />
-            <SalePerformance />
+  return (
+    <FilterProvider>
+      <Header />
+      <div className="dashboard-content-area">
+        {/* TIER 1 */}
+        <div className="stats-grid">
+          <UpgradeBanner />
+          <StatCard title="Gross Revenue"    value="$2,480.32" change="+8.33%" />
+          <StatCard title="Avg. Order Value" value="$320.21"   change="-8.33%" />
+          <StatCard title="Total Orders"     value="$1,899.49" change="+8.33%" />
+        </div>
+
+        {/* TIER 2 */}
+        <div className="main-grid-layout">
+          <div className="charts-column">
+            <div className="charts-grid-row">
+              <TransactionActivity />
+              <SalePerformance />
+            </div>
+            <div className="charts-grid-row">
+              <OrdersByTime />
+              <ProductStatics />
+            </div>
           </div>
-          <div className="charts-grid-row">
-            <OrdersByTime />
-            <ProductStatics />
+          <div className="schedule-column">
+            <RightPanel />
           </div>
         </div>
-        <div className="schedule-column">
-          <RightPanel />
-        </div>
-      </div>
 
-      {/* TIER 3 */}
-      <div className="bottom-tier">
-        <div className="store-row full-width">
-          {['New York Store', 'Los Angeles Store', 'Chicago Store', 'Houston Store'].map(store => (
-            <div key={store} className="store-card">
-              <div className="store-header">
-                <h4>{store}</h4>
-                <span className="see-more">See More <ChevronRight size={14} strokeWidth={2} /></span>
-              </div>
-              <div className="store-stats">
-                <div className="perf">
-                  <span className="label">Performance Seller - 75%</span>
-                  <span className="members">12 Active Members</span>
+        {/* TIER 3 */}
+        <div className="bottom-tier">
+          <div className="store-row full-width">
+            {['New York Store', 'Los Angeles Store', 'Chicago Store', 'Houston Store'].map(store => (
+              <div key={store} className="store-card">
+                <div className="store-header">
+                  <h4>{store}</h4>
+                  <button 
+                    type="button" 
+                    className="see-more" 
+                    onClick={() => setSelectedStore(store)}
+                  >
+                    See More <ChevronRight size={14} strokeWidth={2} />
+                  </button>
                 </div>
-                <div className="avatars">
-                  <div className="avatar" /><div className="avatar" /><div className="avatar" />
-                  <span className="plus">+9</span>
+                <div className="store-stats">
+                  <div className="perf">
+                    <span className="label">Performance Seller - 75%</span>
+                    <span className="members">12 Active Members</span>
+                  </div>
+                  <div className="avatars">
+                    <div className="avatar" /><div className="avatar" /><div className="avatar" />
+                    <span className="plus">+9</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="product-conversion-row">
+            <div className="product-block"><ProductList /></div>
+            <div className="conversion-block"><ConversionRate /></div>
+          </div>
+        </div>
+      </div>
+
+      {/* Store Details Modal */}
+      {selectedStore && (
+        <div className="modal-overlay" onClick={() => setSelectedStore(null)}>
+          <div className="modal-content store-modal" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <div className="modal-header-left">
+                <h2 className="modal-title">{selectedStore} Details</h2>
+                <span className="badge badge-success">Online</span>
+              </div>
+              <button className="close-modal-btn" onClick={() => setSelectedStore(null)}>×</button>
+            </div>
+            
+            <div className="modal-body">
+              <div className="modal-stats-row">
+                <div className="m-stat">
+                  <span className="m-label">Daily Revenue</span>
+                  <span className="m-value">$12,480.00</span>
+                </div>
+                <div className="m-stat">
+                  <span className="m-label">Total Orders</span>
+                  <span className="m-value">842</span>
+                </div>
+                <div className="m-stat">
+                  <span className="m-label">Inventory Status</span>
+                  <span className="m-value" style={{ color: '#059669' }}>Healthy</span>
+                </div>
+              </div>
+              
+              <div className="modal-section">
+                <h4>Team Performance</h4>
+                <div className="team-list">
+                  {[1,2,3].map(i => (
+                    <div key={i} className="team-member">
+                      <div className="m-avatar-circle" />
+                      <div className="m-info">
+                        <span className="m-name">Member {i}</span>
+                        <span className="m-role">Top Seller</span>
+                      </div>
+                      <span className="m-perf-tag">98%</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
-          ))}
+            
+            <div className="modal-footer">
+              <button className="btn-secondary" onClick={() => setSelectedStore(null)}>Close</button>
+              <button className="btn-primary">View Full Report</button>
+            </div>
+          </div>
         </div>
-
-        <div className="product-conversion-row">
-          <div className="product-block"><ProductList /></div>
-          <div className="conversion-block"><ConversionRate /></div>
-        </div>
-      </div>
-    </div>
-  </FilterProvider>
-);
+      )}
+    </FilterProvider>
+  );
+};
 
 /* ── App Shell ─────────────────────────────────────────────── */
 function App() {

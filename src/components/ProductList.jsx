@@ -18,6 +18,7 @@ const ProductList = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectAll, setSelectAll] = useState(false);
   const [selectedIds, setSelectedIds] = useState([]);
+  const [showAll, setShowAll] = useState(false);
 
   const {
     selectedCategories,
@@ -36,6 +37,8 @@ const ProductList = () => {
       p.category.toLowerCase().includes(searchQuery.toLowerCase());
     return matchCategory && matchStatus && matchPrice && matchSearch;
   });
+
+  const displayProducts = showAll ? filtered : filtered.slice(0, 6);
 
   const toggleSelectAll = (e) => {
     const checked = e.target.checked;
@@ -78,7 +81,13 @@ const ProductList = () => {
             )}
           </div>
           <div className="prod-toolbar-actions-top">
-            <button type="button" className="prod-see-more-pill">See More</button>
+            <button 
+              type="button" 
+              className="prod-see-more-pill"
+              onClick={() => setShowAll(!showAll)}
+            >
+              {showAll ? 'See Less' : 'See More'}
+            </button>
             <button
               type="button"
               className="prod-icon-circle prod-icon-circle--light"
@@ -141,7 +150,6 @@ const ProductList = () => {
                   />
                 </th>
                 <th className="col-name">Product Name</th>
-                <th className="col-category">Category</th>
                 <th className="col-revenue">Revenue</th>
                 <th className="col-sales">Sales</th>
                 <th className="col-reviews">Reviews</th>
@@ -150,7 +158,7 @@ const ProductList = () => {
               </tr>
             </thead>
             <tbody>
-              {filtered.map(product => (
+              {displayProducts.map(product => (
                 <tr key={product.id} className={selectedIds.includes(product.id) ? 'selected-row' : ''}>
                   <td className="col-check" data-label="Select">
                     <input 
@@ -172,14 +180,13 @@ const ProductList = () => {
                       </div>
                     </div>
                   </td>
-                  <td className="p-muted col-category" data-label="Category">{product.category}</td>
                   <td className="p-bold col-revenue" data-label="Revenue">${product.revenue.toFixed(2)}</td>
                   <td className="p-bold col-sales" data-label="Sales">{product.sales}</td>
                   <td className="p-muted col-reviews" data-label="Reviews">{product.reviews}</td>
                   <td className="p-muted col-views" data-label="Views">{product.views}</td>
                   <td className="active-col col-active" data-label="Active">
                     <label className="p-toggle">
-                      <input type="checkbox" defaultChecked={product.active} />
+                      <input type="checkbox" defaultChecked={product.active} onChange={() => {}} />
                       <span className="p-slider" />
                     </label>
                   </td>

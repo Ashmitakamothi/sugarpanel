@@ -6,7 +6,13 @@ export const UpgradeBanner = () => (
   <div className="upgrade-banner">
     <div className="banner-content">
       <h2>Sharpen your Skill with Professional Online</h2>
-      <button type="button" className="upgrade-now-btn">Upgrade Now</button>
+      <button 
+        type="button" 
+        className="upgrade-now-btn"
+        onClick={() => alert('Redirecting to Professional Upgrade plans...')}
+      >
+        Upgrade Now
+      </button>
     </div>
   </div>
 );

@@ -122,7 +122,12 @@ const RightPanel = () => {
 
         <div className="meeting-blocks-list">
           {filteredData.map(item => (
-            <div key={item.id} className="meeting-block">
+            <div 
+              key={item.id} 
+              className="meeting-block"
+              onClick={() => alert(`Details for: ${item.title}\nTime: ${item.time}`)}
+              style={{ cursor: 'pointer' }}
+            >
               <div className="block-header">
                 <span className="block-tag" style={{ color: item.color, background: `${item.color}15` }}>
                   {item.tag}

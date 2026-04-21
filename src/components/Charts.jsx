@@ -1,10 +1,44 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { 
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   BarChart, Bar, Cell, Legend
 } from 'recharts';
 import { Calendar, Search } from 'lucide-react';
 
+const DatePickerButton = ({ label }) => {
+  const inputRef = useRef(null);
+  
+  const handleOpenPicker = () => {
+    if (inputRef.current) {
+      if ('showPicker' in HTMLInputElement.prototype) {
+        inputRef.current.showPicker();
+      } else {
+        inputRef.current.click();
+      }
+    }
+  };
+
+  return (
+    <div style={{ position: 'relative', display: 'inline-block' }}>
+      <button type="button" className="chart-filter-btn" onClick={handleOpenPicker}>
+        {label} <Calendar size={14} strokeWidth={2} />
+      </button>
+      <input 
+        type="date" 
+        ref={inputRef} 
+        style={{ 
+          position: 'absolute', 
+          opacity: 0, 
+          pointerEvents: 'none', 
+          width: '1px', 
+          height: '1px',
+          bottom: 0,
+          left: '50%'
+        }} 
+      />
+    </div>
+  );
+};
 
 const transactionData = [
   { name: 'Jan', total: 400, success: 240 },
@@ -40,9 +74,7 @@ export const TransactionActivity = () => (
   <div className="chart-card tall">
     <div className="chart-header">
       <h3>Transaction Activity</h3>
-      <button type="button" className="chart-filter-btn">
-        Last Year <Calendar size={14} strokeWidth={2} />
-      </button>
+      <DatePickerButton label="Last Year" />
     </div>
     <div className="chart-container chart-container-line" style={{ height: '250px', width: '100%', minWidth: '0' }}>
       <ResponsiveContainer width="100%" height="100%">
@@ -91,9 +123,7 @@ export const SalePerformance = () => (
         <span className="performance-value">91.72%</span>
         <span className="badge badge-success">+8.33%</span>
       </div>
-      <button type="button" className="chart-filter-btn">
-        Last Year <Calendar size={14} strokeWidth={2} />
-      </button>
+      <DatePickerButton label="Last Year" />
     </div>
     <div className="chart-container chart-container-bar" style={{ height: '250px', width: '100%', minWidth: '0' }}>
       <ResponsiveContainer width="100%" height="100%">
@@ -125,7 +155,7 @@ export const OrdersByTime = () => (
       <h3>Orders By Time</h3>
       <div className="flex items-center gap-2 orders-by-time-tools">
         <div className="heat-legend">0 <div className="heat-dots"><span></span><span></span><span></span><span></span></div> 2500</div>
-        <button type="button" className="chart-filter-btn">January 2025 <Calendar size={14} strokeWidth={2} /></button>
+        <DatePickerButton label="January 2025" />
         <button type="button" className="icon-btn-small" aria-label="Search"><Search size={14} strokeWidth={2}/></button>
       </div>
     </div>
@@ -146,7 +176,7 @@ export const ProductStatics = () => (
   <div className="chart-card">
     <div className="chart-header">
       <h3>Product Statics</h3>
-      <button type="button" className="chart-filter-btn">Last Year <Calendar size={14} strokeWidth={2} /></button>
+      <DatePickerButton label="Last Year" />
     </div>
     <div className="chart-container chart-container-product-statics" style={{ height: '230px', width: '100%', minWidth: '0' }}>
        <ResponsiveContainer width="100%" height="100%">
