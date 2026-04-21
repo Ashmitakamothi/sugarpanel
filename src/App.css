@@ -2106,6 +2106,14 @@
   background-color: var(--bg-hover);
 }
 
+.prod-table tr.selected-row {
+  background-color: rgba(37, 99, 235, 0.05) !important;
+}
+
+[data-theme='dark'] .prod-table tr.selected-row {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
 .prod-cell {
   display: flex;
   align-items: center;
@@ -3370,6 +3378,12 @@ input:checked + .p-slider:before {
   transform: scale(1.2);
 }
 
+.accent-dot.active {
+  border-color: var(--text-main);
+  transform: scale(1.3);
+  box-shadow: 0 0 0 2px var(--bg-app), 0 0 0 4px var(--primary);
+}
+
 .settings-minimal-input {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -3748,4 +3762,41 @@ input:checked + .p-slider:before {
 [data-theme='dark'] .icon-btn-small:hover {
   background: rgba(255, 255, 255, 0.1) !important;
   transform: translateY(-1px);
+}
+
+.nav-arrow-hitbox {
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.nav-arrow-hitbox:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme='dark'] .nav-arrow-hitbox:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.schedule-search-input-wrap {
+  padding: 0 4px 12px 4px;
+}
+
+.sch-mini-search {
+  width: 100%;
+  background: var(--bg-app);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  outline: none;
+}
+
+.sch-mini-search:focus {
+  border-color: var(--primary);
 }

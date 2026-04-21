@@ -17,6 +17,7 @@ const ProductList = () => {
   const searchInputRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectAll, setSelectAll] = useState(false);
+  const [selectedIds, setSelectedIds] = useState([]);
 
   const {
     selectedCategories,
@@ -35,6 +36,22 @@ const ProductList = () => {
       p.category.toLowerCase().includes(searchQuery.toLowerCase());
     return matchCategory && matchStatus && matchPrice && matchSearch;
   });
+
+  const toggleSelectAll = (e) => {
+    const checked = e.target.checked;
+    setSelectAll(checked);
+    if (checked) {
+      setSelectedIds(filtered.map(p => p.id));
+    } else {
+      setSelectedIds([]);
+    }
+  };
+
+  const toggleProduct = (id) => {
+    setSelectedIds(prev => 
+      prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
+    );
+  };
 
   const activeCount = computeActiveCount();
 
@@ -120,7 +137,7 @@ const ProductList = () => {
                     className="custom-check"
                     aria-label="Select all"
                     checked={selectAll}
-                    onChange={e => setSelectAll(e.target.checked)}
+                    onChange={toggleSelectAll}
                   />
                 </th>
                 <th className="col-name">Product Name</th>
@@ -134,9 +151,15 @@ const ProductList = () => {
             </thead>
             <tbody>
               {filtered.map(product => (
-                <tr key={product.id}>
+                <tr key={product.id} className={selectedIds.includes(product.id) ? 'selected-row' : ''}>
                   <td className="col-check" data-label="Select">
-                    <input type="checkbox" className="custom-check" aria-label={`Select ${product.name}`} checked={selectAll} onChange={() => {}} />
+                    <input 
+                      type="checkbox" 
+                      className="custom-check" 
+                      aria-label={`Select ${product.name}`} 
+                      checked={selectedIds.includes(product.id)} 
+                      onChange={() => toggleProduct(product.id)} 
+                    />
                   </td>
                   <td className="col-name" data-label="Product">
                     <div className="prod-cell">

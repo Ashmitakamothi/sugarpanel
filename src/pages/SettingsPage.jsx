@@ -29,6 +29,7 @@ const SettingsPage = () => {
   const { isDark, toggleDark } = useDarkMode();
   const [notifs, setNotifs] = useState({ email: true, push: false, sms: false });
   const [lang, setLang] = useState('en');
+  const [activeAccent, setActiveAccent] = useState('#2563EB');
 
   return (
     <div className="settings-container">
@@ -48,7 +49,13 @@ const SettingsPage = () => {
           <SettingsRow label="Theme Accent" sub="Choose your primary dashboard color">
             <div className="accent-picker">
               {['#4F46E5','#2563EB','#059669','#DC2626','#D97706'].map(c => (
-                <button key={c} className="accent-dot" style={{ background: c }} aria-label={`Select ${c}`} />
+                <button 
+                  key={c} 
+                  className={`accent-dot ${activeAccent === c ? 'active' : ''}`} 
+                  style={{ background: c }} 
+                  aria-label={`Select ${c}`}
+                  onClick={() => setActiveAccent(c)}
+                />
               ))}
             </div>
           </SettingsRow>
