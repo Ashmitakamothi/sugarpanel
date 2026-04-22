@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Search, ChevronDown } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const scheduleData = {
   Meetings: [
@@ -59,6 +60,7 @@ const months = [
 ];
 
 const RightPanel = () => {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('Meetings');
   const [monthIndex, setMonthIndex] = useState(0);
   const [isSearching, setIsSearching] = useState(false);
@@ -79,9 +81,9 @@ const RightPanel = () => {
     <div className="right-panel">
       <div className="schedule-card-v2">
         <div className="schedule-header">
-          <h3>Schedule</h3>
+          <h3>{t('schedule')}</h3>
           <div className="header-actions">
-            <button className="see-all-pill" onClick={() => alert('Viewing full schedule...')}>See All</button>
+            <button className="see-all-pill" onClick={() => alert('Viewing full schedule...')}>{t('seeAll')}</button>
             <button 
               className={`search-btn-circle ${isSearching ? 'active' : ''}`} 
               aria-label="Search schedule"
@@ -115,7 +117,7 @@ const RightPanel = () => {
               className={`sch-tab ${activeTab === tab ? 'active' : ''}`}
               onClick={() => setActiveTab(tab)}
             >
-              {tab}
+              {t(tab.toLowerCase())}
             </button>
           ))}
         </div>
@@ -138,7 +140,7 @@ const RightPanel = () => {
               <p className="block-time">{item.time}</p>
               
               <div className="block-footer">
-                <span className="block-location">On Google Meet</span>
+                <span className="block-location">{t('onGoogleMeet')}</span>
                 <div className="member-avatars">
                    <div className="m-avatar"></div>
                    <div className="m-avatar"></div>

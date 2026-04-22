@@ -20,11 +20,13 @@ import InboxPage          from './pages/InboxPage';
 import PagesPage          from './pages/PagesPage';
 import ReportsPage        from './pages/ReportsPage';
 import SettingsPage       from './pages/SettingsPage';
+import { useLanguage } from './context/LanguageContext';
 
 import './App.css';
 
 /* ── Dashboard (index) ─────────────────────────────────────── */
 const DashboardPage = () => {
+  const { t } = useLanguage();
   const [selectedStore, setSelectedStore] = useState(null);
 
   return (
@@ -34,9 +36,9 @@ const DashboardPage = () => {
         {/* TIER 1 */}
         <div className="stats-grid">
           <UpgradeBanner />
-          <StatCard title="Gross Revenue"    value="$2,480.32" change="+8.33%" />
-          <StatCard title="Avg. Order Value" value="$320.21"   change="-8.33%" />
-          <StatCard title="Total Orders"     value="$1,899.49" change="+8.33%" />
+          <StatCard title={t('grossRevenue')}    value="$2,480.32" change="+8.33%" />
+          <StatCard title={t('avgOrderValue')} value="$320.21"   change="-8.33%" />
+          <StatCard title={t('totalOrders')}     value="$1,899.49" change="+8.33%" />
         </div>
 
         {/* TIER 2 */}
@@ -68,13 +70,13 @@ const DashboardPage = () => {
                     className="see-more" 
                     onClick={() => setSelectedStore(store)}
                   >
-                    See More <ChevronRight size={14} strokeWidth={2} />
+                    {t('seeMore')} <ChevronRight size={14} strokeWidth={2} />
                   </button>
                 </div>
                 <div className="store-stats">
                   <div className="perf">
-                    <span className="label">Performance Seller - 75%</span>
-                    <span className="members">12 Active Members</span>
+                    <span className="label">{t('performanceSeller')} - 75%</span>
+                    <span className="members">12 {t('activeMembers')}</span>
                   </div>
                   <div className="avatars">
                     <div className="avatar" /><div className="avatar" /><div className="avatar" />
@@ -148,12 +150,15 @@ const DashboardPage = () => {
   );
 };
 
+import { LanguageProvider } from './context/LanguageContext';
+
 /* ── App Shell ─────────────────────────────────────────────── */
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="app-wrapper">
+    <LanguageProvider>
+      <div className="app-wrapper">
       {/* Background */}
       <div className="dashboard-background" aria-hidden="true">
         <div className="dashboard-bg-base" />
@@ -182,6 +187,7 @@ function App() {
         </main>
       </div>
     </div>
+    </LanguageProvider>
   );
 }
 

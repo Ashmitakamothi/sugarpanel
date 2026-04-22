@@ -1,21 +1,25 @@
 import React from 'react';
 import { TrendingUp, TrendingDown } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 
-export const UpgradeBanner = () => (
-  <div className="upgrade-banner">
-    <div className="banner-content">
-      <h2>Sharpen your Skill with Professional Online</h2>
-      <button 
-        type="button" 
-        className="upgrade-now-btn"
-        onClick={() => alert('Redirecting to Professional Upgrade plans...')}
-      >
-        Upgrade Now
-      </button>
+export const UpgradeBanner = () => {
+  const { t } = useLanguage();
+  return (
+    <div className="upgrade-banner">
+      <div className="banner-content">
+        <h2>{t('sharpenSkill')}</h2>
+        <button 
+          type="button" 
+          className="upgrade-now-btn"
+          onClick={() => alert('Redirecting to Professional Upgrade plans...')}
+        >
+          {t('upgradeNow')}
+        </button>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const DEFAULT_PERIOD = 'From Jan 01, 2025 - March 30, 2024';
 

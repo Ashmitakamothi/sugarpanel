@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Search, RotateCcw, TrendingUp, SlidersHorizontal } from 'lucide-react';
 import { useFilters } from '../context/FilterContext';
+import { useLanguage } from '../context/LanguageContext';
 
 const allProducts = [
   { id: 1, name: 'Liam Anderson Red',      category: 'Electronics',   status: 'In Stock',     revenue: 1240.22, sales: '1,909', reviews: '2,102', views: '3,022', active: true  },
@@ -14,6 +15,7 @@ const allProducts = [
 ];
 
 const ProductList = () => {
+  const { t } = useLanguage();
   const searchInputRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectAll, setSelectAll] = useState(false);
@@ -60,13 +62,13 @@ const ProductList = () => {
 
   return (
     <div className="product-list-card">
-      <h2 className="section-title">Product List</h2>
+      <h2 className="section-title">{t('productList')}</h2>
 
       <div className="prod-toolbar-shell">
         <div className="prod-toolbar-row">
           <div className="prod-stats">
             <span className="count">{filtered.length}</span>
-            <span className="label">{filtered.length === 1 ? 'Item' : 'Items'}</span>
+            <span className="label">{t('items')}</span>
             {activeCount > 0 && (
               <span className="prod-filter-active-badge">
                 <SlidersHorizontal size={11} strokeWidth={2.5} />
@@ -86,7 +88,7 @@ const ProductList = () => {
               className="prod-see-more-pill"
               onClick={() => setShowAll(!showAll)}
             >
-              {showAll ? 'See Less' : 'See More'}
+              {showAll ? t('seeLess') || 'See Less' : t('seeMore')}
             </button>
             <button
               type="button"
@@ -105,7 +107,7 @@ const ProductList = () => {
             <input
               ref={searchInputRef}
               type="search"
-              placeholder="Search products..."
+              placeholder={t('searchProducts')}
               autoComplete="off"
               aria-label="Search products"
               value={searchQuery}
@@ -149,12 +151,12 @@ const ProductList = () => {
                     onChange={toggleSelectAll}
                   />
                 </th>
-                <th className="col-name">Product Name</th>
-                <th className="col-revenue">Revenue</th>
-                <th className="col-sales">Sales</th>
-                <th className="col-reviews">Reviews</th>
-                <th className="col-views">Views</th>
-                <th className="active-col col-active">Active</th>
+                <th className="col-name">{t('productName')}</th>
+                <th className="col-revenue">{t('revenue')}</th>
+                <th className="col-sales">{t('sales')}</th>
+                <th className="col-reviews">{t('reviews')}</th>
+                <th className="col-views">{t('views')}</th>
+                <th className="active-col col-active">{t('active')}</th>
               </tr>
             </thead>
             <tbody>
@@ -175,7 +177,7 @@ const ProductList = () => {
                       <div className="prod-info">
                         <div className="p-name">{product.name}</div>
                         <div className={`p-status ${product.status === 'Out of Stock' ? 'p-status--out' : ''}`}>
-                          {product.status}
+                          {product.status === 'In Stock' ? t('inStock') : t('outOfStock')}
                         </div>
                       </div>
                     </div>

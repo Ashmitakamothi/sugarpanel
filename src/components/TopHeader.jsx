@@ -11,11 +11,12 @@ import {
   Globe,
   Check
 } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const TopHeader = ({ onMenuToggle }) => {
+  const { language, t, changeLanguage } = useLanguage();
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [selectedLang, setSelectedLang] = useState('EN');
   const dropdownRef = useRef(null);
 
   const toggleDropdown = (name) => {
@@ -23,7 +24,7 @@ const TopHeader = ({ onMenuToggle }) => {
   };
 
   const selectLanguage = (code) => {
-    setSelectedLang(code);
+    changeLanguage(code);
     setActiveDropdown(null);
   };
 
@@ -99,22 +100,22 @@ const TopHeader = ({ onMenuToggle }) => {
                 aria-label="Language selector"
                 data-tooltip="Language"
               >
-                <span>{selectedLang}</span>
+                <span>{language}</span>
                 <ChevronDown size={16} strokeWidth={2} className="lang-chevron" />
               </button>
               
               {activeDropdown === 'lang' && (
                 <div className="dropdown-menu lang-dropdown">
-                  <div className="dropdown-header">Select Language</div>
+                  <div className="dropdown-header">{t('selectLanguage')}</div>
                   {languages.map(lang => (
                     <button 
                       key={lang.code} 
-                      className={`dropdown-item ${selectedLang === lang.code ? 'selected' : ''}`}
+                      className={`dropdown-item ${language === lang.code ? 'selected' : ''}`}
                       onClick={() => selectLanguage(lang.code)}
                     >
                       <Globe size={14} className="item-icon" />
                       <span>{lang.name}</span>
-                      {selectedLang === lang.code && <Check size={14} className="check-icon" />}
+                      {language === lang.code && <Check size={14} className="check-icon" />}
                     </button>
                   ))}
                 </div>

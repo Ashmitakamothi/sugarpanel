@@ -15,20 +15,22 @@ import {
   Settings
 } from 'lucide-react';
 import { useDarkMode } from '../context/DarkModeContext';
+import { useLanguage } from '../context/LanguageContext';
 
 const menuItems = [
-  { label: 'Dashboard',      icon: LayoutDashboard, path: '/' },
-  { label: 'Analytics',      icon: BarChart2,        path: '/analytics' },
-  { label: 'Products',       icon: Package,          path: '/products' },
-  { label: 'Customers',      icon: Users,            path: '/customers' },
-  { label: 'Notifications',  icon: Bell,             path: '/notifications' },
-  { label: 'Inbox',          icon: Inbox,            path: '/inbox' },
-  { label: 'Pages',          icon: Layers,           path: '/pages' },
-  { label: 'Reports',        icon: FileText,         path: '/reports' },
+  { label: 'Dashboard',      icon: LayoutDashboard, path: '/', key: 'dashboard' },
+  { label: 'Analytics',      icon: BarChart2,        path: '/analytics', key: 'analytics' },
+  { label: 'Products',       icon: Package,          path: '/products', key: 'products' },
+  { label: 'Customers',      icon: Users,            path: '/customers', key: 'customers' },
+  { label: 'Notifications',  icon: Bell,             path: '/notifications', key: 'notifications' },
+  { label: 'Inbox',          icon: Inbox,            path: '/inbox', key: 'inbox' },
+  { label: 'Pages',          icon: Layers,           path: '/pages', key: 'pages' },
+  { label: 'Reports',        icon: FileText,         path: '/reports', key: 'reports' },
 ];
 
 const Sidebar = ({ isOpen, onClose }) => {
   const { isDark, toggleDark } = useDarkMode();
+  const { t } = useLanguage();
   const navigate = useNavigate();
 
   const handleSettingsClick = () => {
@@ -67,7 +69,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                 onClick={onClose}
               >
                 <item.icon size={20} strokeWidth={2} className="nav-icon" />
-                <span className="nav-label">{item.label}</span>
+                <span className="nav-label">{t(item.key)}</span>
               </NavLink>
             ))}
           </div>
@@ -84,7 +86,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                 ? <Sun  size={20} strokeWidth={2} className="nav-icon" />
                 : <Moon size={20} strokeWidth={2} className="nav-icon" />
               }
-              <span className="nav-label">{isDark ? 'Light Mode' : 'Dark Mode'}</span>
+              <span className="nav-label">{isDark ? 'Light Mode' : t('darkMode')}</span>
             </button>
 
             {/* Settings */}
@@ -96,7 +98,7 @@ const Sidebar = ({ isOpen, onClose }) => {
               onClick={onClose}
             >
               <Settings size={20} strokeWidth={2} className="nav-icon" />
-              <span className="nav-label">Settings</span>
+              <span className="nav-label">{t('settings')}</span>
             </NavLink>
           </div>
         </nav>

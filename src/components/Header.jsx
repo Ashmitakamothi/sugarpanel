@@ -12,8 +12,10 @@ import {
 } from 'lucide-react';
 import { exportToCSV, exportToExcel, exportToPDF } from '../utils/exportUtils';
 import { useFilters, CATEGORIES, STATUSES, PRICE_MIN, PRICE_MAX } from '../context/FilterContext';
+import { useLanguage } from '../context/LanguageContext';
 
 const Header = () => {
+  const { language, t } = useLanguage();
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [selectedDate, setSelectedDate] = useState('Date');
   const [customRange, setCustomRange] = useState({ start: '', end: '' });
@@ -124,13 +126,13 @@ const Header = () => {
     <header className="header" aria-label="Dashboard header" ref={headerRef}>
       <div className="header-left">
         <div className="header-welcome-text">
-          <h1 className="welcome-title">Welcome Back Ameerah Howard</h1>
+          <h1 className="welcome-title">{t('welcomeBack')} Ameerah Howard</h1>
           <p className="header-subtitle">
-            <span className="header-subtitle-muted">You have </span>
+            <span className="header-subtitle-muted">{language === 'HI' ? '' : 'You have '}</span>
             <button type="button" className="header-subtitle-em" data-tooltip="View Notifications">
-              2 unread
+              2 {t('unreadNotifications')}
             </button>
-            <span className="header-subtitle-muted"> notifications</span>
+            <span className="header-subtitle-muted"> {t('notifications')}</span>
           </p>
         </div>
       </div>
@@ -141,7 +143,7 @@ const Header = () => {
           <input 
             ref={searchInputRef}
             type="search" 
-            placeholder="Search..." 
+            placeholder={t('search')} 
             autoComplete="off" 
             aria-label="Search" 
           />
@@ -233,7 +235,7 @@ const Header = () => {
             aria-label="Export Document"
             data-tooltip="Download Report"
           >
-            <span className="header-export-label">Export Document</span>
+            <span className="header-export-label">{t('exportDocument')}</span>
             <FileDown size={18} strokeWidth={2.5} className="btn-right-icon" aria-hidden="true" />
           </button>
 
